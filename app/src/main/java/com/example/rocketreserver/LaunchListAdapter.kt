@@ -9,6 +9,9 @@ import com.example.rocketreserver.databinding.LaunchItemBinding
 class LaunchListAdapter(
     private val launches: List<LaunchListQuery.Launch>
 ) : RecyclerView.Adapter<LaunchListAdapter.ViewHolder>() {
+    var onEndOfListReached: (() -> Unit)? = null
+    var onItemClicked: ((LaunchListQuery.Launch) -> Unit)? = null
+
 
     class ViewHolder(val binding: LaunchItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -22,11 +25,18 @@ class LaunchListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         val launch = launches[position]
         holder.binding.site.text = launch.site ?: ""
         holder.binding.missionName.text = launch.mission?.name
         holder.binding.missionPatch.load(launch.mission?.missionPatch) {
             placeholder(R.drawable.ic_placeholder)
+        }
+        holder.binding.root.setOnClickListener {
+            onItemClicked?.invoke(launch)
+        }
+        if (position == launches.size - 1) {
+            onEndOfListReached?.invoke()
         }
     }
 }
