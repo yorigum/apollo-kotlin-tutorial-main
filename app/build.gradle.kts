@@ -44,6 +44,9 @@ dependencies {
     implementation("androidx.paging:paging-runtime-ktx:3.1.1")
     implementation("com.google.android.material:material:1.6.1")
     implementation("androidx.security:security-crypto:1.1.0-alpha03")
+    implementation("com.github.chuckerteam.chucker:library:3.5.2")
+//    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+//    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
